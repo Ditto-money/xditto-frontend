@@ -1,7 +1,6 @@
 import React from 'react';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 
-import TextField from '@material-ui/core/TextField';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import Tabs from '@material-ui/core/Tabs';
@@ -9,10 +8,6 @@ import Tab from '@material-ui/core/Tab';
 
 import MintForm from '../components/MintForm'
 import RedeemForm from '../components/RedeemForm'
-import FormButton from '../components/FormButton'
-
-
-
 
 
 const useStyles = makeStyles((theme) => ({
@@ -110,7 +105,6 @@ export default function Index() {
       <TabPanel value={value} index={1}>
         <RedeemForm />
       </TabPanel>
-      {/* <FormButton /> */}
     </Box>
   );
 }

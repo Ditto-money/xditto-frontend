@@ -13,8 +13,10 @@ import {
     UserRejectedRequestError as UserRejectedRequestErrorInjected
 } from "@web3-react/injected-connector";
 
-import XDITTO_ABI from '../lib/contract/abi.json'
-import DITTO_ABI from '../lib/contract/DITTOAbi.json'
+import XDITTO_ABI from '../lib/contract/abi.json';
+import DITTO_ABI from '../lib/contract/DITTOAbi.json';
+import ORACLE_ABI from '../lib/contract/oracleAbi.json';
+
 import { useDarkmode } from '../lib/ui-context';
 import { useEagerConnect, useInactiveListener } from "../lib/injected-connector-hooks";
 
@@ -22,9 +24,6 @@ import { lightTheme, darkTheme } from '../theme';
 
 import Header from './Header'
 import WalletInfo from './WalletInfo'
-
-
-
 
 
 
@@ -78,6 +77,7 @@ export default function Layout({ children }) {
     const [exchangeRate, setExchangeRate] = React.useState();
     const [xDittoBalance, setXDittoBalance] = React.useState();
     const [dittoBalance, setDittoBalance] = React.useState();
+    const [usdPrice, setUsdPrice] = React.useState();
 
     React.useEffect(() => {
         const getXDittoValues = async () => {
@@ -97,9 +97,17 @@ export default function Layout({ children }) {
             setDittoBalance(formattedDittoBalance);
         }
 
+        const getUsdPrice = async () => {
+            const oracleContract = new ethers.Contract('0x2df19009b4a48636699d4dbf00e1d7f923c6fa47', ORACLE_ABI, library.getSigner());
+            const oracleData = await oracleContract.getData();
+            const oraclePrice = ethers.utils.formatUnits(oracleData, 18);
+            setUsdPrice(oraclePrice);
+        }
+
         if (library) {
             getXDittoValues();
             getDittoBalance();
+            getUsdPrice();
         }
     }, [library, chainId]);
 
@@ -108,7 +116,7 @@ export default function Layout({ children }) {
         <ThemeProvider theme={theme}>
             <Box bgcolor="background.default" height="100vh">
                 <Header setActivatingConnector={setActivatingConnector} getErrorMessage={getErrorMessage} />
-                <WalletInfo dittoBalance={dittoBalance} xDittoBalance={xDittoBalance} exchangeRate={exchangeRate} />
+                <WalletInfo dittoBalance={dittoBalance} xDittoBalance={xDittoBalance} exchangeRate={exchangeRate} usdPrice={usdPrice} />
                 {children}
             </Box>
         </ThemeProvider>

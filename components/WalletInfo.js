@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function WalletInfo({ dittoBalance, xDittoBalance, exchangeRate }) {
+export default function WalletInfo({ dittoBalance, xDittoBalance, exchangeRate, usdPrice }) {
 
     const classes = useStyles();
     const context = useWeb3React();
@@ -50,43 +50,56 @@ export default function WalletInfo({ dittoBalance, xDittoBalance, exchangeRate }
         error
     } = context;
 
+    console.log(usdPrice);
+
+    const [dittoPrice, setDittoPrice] = React.useState(usdPrice);
+
     return (
-        <Box postion="absolute" position="absolute" top="35%" right="5%" display="flex" flexDirection="column" alignItems="center">
-            <Typography color="textPrimary">DITTO in wallet</Typography>
+        <Box postion="absolute" position="absolute" top="30%" right="7.5%" display="flex" flexDirection="column" alignItems="center">
+            <Typography color="primary" variant="h6">DITTO in wallet</Typography>
             {
                 account === undefined
                     ?
-                    <Typography color="textPrimary">{'...'}</Typography>
+                    <Typography color="textPrimary" variant="body2" style={{ paddingTop: '10px' }}>{'...'}</Typography>
                     :
                     account === null
                         ?
-                        <Typography color="textPrimary">{None}</Typography>
+                        <Typography color="textPrimary" variant="body2" style={{ paddingTop: '10px' }}>{None}</Typography>
                         :
-                        <Typography color="textPrimary">{dittoBalance}</Typography>
+                        <Box textAlign='center'>
+                            <Typography color="textPrimary" variant="body2" style={{ paddingTop: '10px' }}>{`${dittoBalance} DITTO`}</Typography>
+                            <Typography color="textPrimary" variant="body2" style={{ paddingTop: '5px' }}>{`${usdPrice * dittoBalance} USD`}</Typography>
+                        </Box>
+
             }
-            <Typography color="textPrimary" style={{ paddingTop: '40px' }}>xDITTO in wallet</Typography>
+            <Typography color="primary" variant="h6" style={{ paddingTop: '40px' }}>xDITTO in wallet</Typography>
             {
                 account === undefined
                     ?
-                    <Typography color="textPrimary">{'...'}</Typography>
+                    <Typography color="textPrimary" variant="body2" style={{ paddingTop: '10px' }}>{'...'}</Typography>
                     :
                     account === null
                         ?
-                        <Typography color="textPrimary">{None}</Typography>
+                        <Typography color="textPrimary" variant="body2" style={{ paddingTop: '10px' }}>{None}</Typography>
                         :
-                        <Typography color="textPrimary">{xDittoBalance}</Typography>
+                        <Box textAlign='center'>
+                            <Typography color="textPrimary" variant="body2" style={{ paddingTop: '10px' }}>{`${xDittoBalance} xDITTO`}</Typography>
+                            <Typography color="textPrimary" variant="body2" style={{ paddingTop: '5px' }}>{`${(usdPrice * exchangeRate) * xDittoBalance} USD`}</Typography>
+                        </Box>
+
+
             }
-            <Typography color="textPrimary" style={{ paddingTop: '40px' }}>Exchange rate</Typography>
+            <Typography color="primary" variant="h6" style={{ paddingTop: '40px' }}>Exchange rate</Typography>
             {
                 account === undefined
                     ?
-                    <Typography color="textPrimary">{'...'}</Typography>
+                    <Typography color="textPrimary" variant="body2" style={{ paddingTop: '10px' }}>{'...'}</Typography>
                     :
                     account === null
                         ?
-                        <Typography color="textPrimary">{None}</Typography>
+                        <Typography color="textPrimary" variant="body2" style={{ paddingTop: '10px' }}>{Unavailable}</Typography>
                         :
-                        <Typography color="textPrimary"> {exchangeRate}</Typography>
+                        <Typography color="textPrimary" variant="body2" style={{ paddingTop: '10px' }}>{`1 xDITTO = ${exchangeRate} DITTO`}</Typography>
             }
         </Box>
     );
