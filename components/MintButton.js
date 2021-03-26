@@ -10,7 +10,7 @@ import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-import SimpleModal from '../components/SimpleModal'
+import SimpleModal from './SimpleModal'
 
 
 import {
@@ -69,10 +69,10 @@ export default function FormButton({ xDittoContract, dittoContract, inputDitto }
     const approveMint = async () => {
         const amountToApprove = ethers.utils.parseUnits(`1000000000000000000000000.0`, 9);
         setApprovalLoading(true);
-        getAllowanceAmount();
         try {
             const approvalTx = await dittoContract.approve(xDittoContract.address, amountToApprove);
             await approvalTx.wait();
+            getAllowanceAmount();
         } catch (error) {
             console.error(error)
         }

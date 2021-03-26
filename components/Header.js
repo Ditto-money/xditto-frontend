@@ -15,7 +15,6 @@ import Image from 'next/image'
 
 import {
     useWeb3React,
-    UnsupportedChainIdError
 } from "@web3-react/core";
 
 import { useDarkmode } from '../lib/ui-context';

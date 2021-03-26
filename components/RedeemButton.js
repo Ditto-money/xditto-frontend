@@ -85,12 +85,9 @@ export default function RedeemButton({ xDittoContract, dittoContract, inputXDitt
 
     const redeem = async () => {
         const inputXDittoToRedeemWith = ethers.utils.parseUnits(inputXDitto, 18);
-        console.log(inputXDitto, inputXDittoToRedeemWith)
         setRedeemLoading(true);
         try {
-            console.log('1')
             const redeemTx = await xDittoContract.burn(inputXDittoToRedeemWith);
-            console.log('2')
             await redeemTx.wait();
             setModalOpen(true);
         } catch (error) {
@@ -110,7 +107,7 @@ export default function RedeemButton({ xDittoContract, dittoContract, inputXDitt
         );
     }
 
-    if (parseInt(inputXDitto) === 0 || inputXDitto === undefined || inputXDitto === '') {
+    if (!(parseFloat(inputXDitto) > 0) || inputXDitto === undefined || inputXDitto === '') {
         return (
             <Box className={classes.buttonContainer} >
                 <Button type="button">Enter an amount</Button>

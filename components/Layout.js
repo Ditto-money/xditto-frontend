@@ -23,6 +23,7 @@ import { useEagerConnect, useInactiveListener } from "../lib/injected-connector-
 import { lightTheme, darkTheme } from '../theme';
 
 import Header from './Header'
+import Footer from './Footer'
 import WalletInfo from './WalletInfo'
 
 
@@ -118,6 +119,7 @@ export default function Layout({ children }) {
                 <Header setActivatingConnector={setActivatingConnector} getErrorMessage={getErrorMessage} />
                 <WalletInfo dittoBalance={dittoBalance} xDittoBalance={xDittoBalance} exchangeRate={exchangeRate} usdPrice={usdPrice} />
                 {children}
+                <Footer />
             </Box>
         </ThemeProvider>
     );

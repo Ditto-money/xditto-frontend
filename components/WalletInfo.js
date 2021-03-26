@@ -1,28 +1,12 @@
-
-
 import React from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
-import Brightness7Icon from '@material-ui/icons/Brightness7';
-import Brightness3Icon from '@material-ui/icons/Brightness3';
-import IconButton from '@material-ui/core/IconButton';
-
-import Image from 'next/image'
-
 
 import {
     useWeb3React,
-    UnsupportedChainIdError
 } from "@web3-react/core";
-
-import { useDarkmode } from '../lib/ui-context';
-
-import {
-    injected,
-} from '../lib/connectors'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -40,7 +24,6 @@ export default function WalletInfo({ dittoBalance, xDittoBalance, exchangeRate, 
     const classes = useStyles();
     const context = useWeb3React();
     const {
-        connector,
         library,
         chainId,
         account,
@@ -50,12 +33,8 @@ export default function WalletInfo({ dittoBalance, xDittoBalance, exchangeRate, 
         error
     } = context;
 
-    console.log(usdPrice);
-
-    const [dittoPrice, setDittoPrice] = React.useState(usdPrice);
-
     return (
-        <Box postion="absolute" position="absolute" top="30%" right="7.5%" display="flex" flexDirection="column" alignItems="center">
+        <Box position="absolute" top="25%" right="7.5%" display="flex" flexDirection="column" alignItems="center">
             <Typography color="primary" variant="h6">DITTO in wallet</Typography>
             {
                 account === undefined

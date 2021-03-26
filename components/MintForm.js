@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        marginTop: '2%',
+        marginTop: '5%',
     },
     inputField: {
         width: '35%',
