@@ -4,14 +4,12 @@ import React from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
-import Brightness7Icon from '@material-ui/icons/Brightness7';
-import Brightness3Icon from '@material-ui/icons/Brightness3';
-import IconButton from '@material-ui/core/IconButton';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTelegram, faTwitter, faGithub, faMedium } from '@fortawesome/free-brands-svg-icons'
 
 import Image from 'next/image'
-
 
 import {
     useWeb3React,
@@ -61,12 +59,13 @@ export default function Footer({ setActivatingConnector, getErrorMessage }) {
                         height={'100%'}
                     />
                 </Box>
-                <Box display="flex" flexDirection="row" alignItems="center" paddingLeft={5}>
-                    <Typography color="textPrimary">First elastic supply token on BSC <br /> Copywhat? 2021 Ditto.money</Typography>
-                    <Typography color="textPrimary">First elastic supply token on BSC <br /> Copywhat? 2021 Ditto.money</Typography>
-                    <Typography color="textPrimary">First elastic supply token on BSC <br /> Copywhat? 2021 Ditto.money</Typography>
+                <Box display="flex" alignItems="center" paddingLeft={5} width="15%" justifyContent="space-between">
+                    <a href="https://t.me/dittomoney" target="_blank"><FontAwesomeIcon icon={faTelegram} size="2x" style={{ color: '#ED7AC0' }} /></a>
+                    <a href="https://dittomoney.medium.com" target="_blank"><FontAwesomeIcon icon={faMedium} size="2x" style={{ color: '#ED7AC0' }} /></a>
+                    <a href="https://twitter.com/dittomoney_" target="_blank"><FontAwesomeIcon icon={faTwitter} size="2x" style={{ color: '#ED7AC0' }} /></a>
+                    <a href="https://github.com/Ditto-money/" target="_blank"><FontAwesomeIcon icon={faGithub} size="2x" style={{ color: '#ED7AC0' }} /></a>
                 </Box>
-                <Box display="flex" flexDirection="row" alignItems="center" paddingRight={'5%'}>
+                <Box display="flex" alignItems="center" paddingRight={'5%'}>
                     <Typography color="textPrimary">First elastic supply token on BSC <br /> Copywhat? 2021 Ditto.money</Typography>
                 </Box>
             </Box>
