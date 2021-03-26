@@ -23,7 +23,7 @@ import {
 import XDITTO_ABI from '../lib/contract/abi.json'
 import DITTO_ABI from '../lib/contract/DITTOAbi.json'
 
-import FormButton from '../components/FormButton';
+import MintButton from './MintButton';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -176,7 +176,7 @@ export default function MintForm() {
                             <Typography>xDITTO</Typography>
                         </InputAdornment>,
                 }} />
-            <FormButton dittoContract={dittoContract} xDittoContract={xDittoContract} inputDitto={dittoInput} />
+            <MintButton dittoContract={dittoContract} xDittoContract={xDittoContract} inputDitto={dittoInput} />
         </form>
     );
 };
