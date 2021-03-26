@@ -51,7 +51,7 @@ export default function WalletInfo({ dittoBalance, xDittoBalance, exchangeRate }
     } = context;
 
     return (
-        <Box postion="absolute" position="absolute" top="35%" right="5%" display="flex" flexDirection="column">
+        <Box postion="absolute" position="absolute" top="35%" right="5%" display="flex" flexDirection="column" alignItems="center">
             <Typography color="textPrimary">DITTO in wallet</Typography>
             {
                 account === undefined
@@ -64,7 +64,7 @@ export default function WalletInfo({ dittoBalance, xDittoBalance, exchangeRate }
                         :
                         <Typography color="textPrimary">{dittoBalance}</Typography>
             }
-            <Typography color="textPrimary">xDITTO in wallet</Typography>
+            <Typography color="textPrimary" style={{ paddingTop: '40px' }}>xDITTO in wallet</Typography>
             {
                 account === undefined
                     ?
@@ -76,7 +76,7 @@ export default function WalletInfo({ dittoBalance, xDittoBalance, exchangeRate }
                         :
                         <Typography color="textPrimary">{xDittoBalance}</Typography>
             }
-            <Typography color="textPrimary">Exchange rate</Typography>
+            <Typography color="textPrimary" style={{ paddingTop: '40px' }}>Exchange rate</Typography>
             {
                 account === undefined
                     ?
