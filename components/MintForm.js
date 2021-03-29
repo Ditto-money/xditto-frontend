@@ -31,7 +31,10 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        marginTop: '5%',
+        marginTop: '10%',
+        [theme.breakpoints.up('md')]: {
+            marginTop: '2.5%'
+        },
     },
     inputField: {
         width: '95%',
@@ -159,7 +162,7 @@ export default function MintForm() {
                             <Typography>DITTO</Typography>
                         </InputAdornment>,
                 }} />
-            <ArrowDownwardIcon color="primary" style={{ fontSize: 90, marginTop: '10px', marginBottom: '20px' }} />
+            <ArrowDownwardIcon color="primary" style={{ fontSize: 70, marginTop: '5px', marginBottom: '5px' }} />
             <StyledTextField
                 id="xditto-amount-output"
                 className={classes.inputField}

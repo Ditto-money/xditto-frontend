@@ -15,12 +15,6 @@ import {
     useWeb3React,
 } from "@web3-react/core";
 
-import { useDarkmode } from '../lib/ui-context';
-
-import {
-    injected,
-} from '../lib/connectors'
-
 
 const useStyles = makeStyles((theme) => ({
     desktopContainer: {
@@ -35,6 +29,7 @@ const useStyles = makeStyles((theme) => ({
         [theme.breakpoints.up('md')]: {
             display: 'none',
         },
+        paddingTop: "2%"
     }
 }));
 
@@ -76,7 +71,7 @@ export default function Footer() {
                     </Box>
                 </Box>
             </Box>
-            <Box className={classes.mobileContainer} marginTop="20%">
+            <Box className={classes.mobileContainer}>
                 <Box display="flex" flexDirection="column" alignItems="center">
                     <Box display="flex" alignItems="center">
                         <Image

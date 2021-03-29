@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Box from '@material-ui/core/Box';
-import { ThemeProvider } from '@material-ui/core/styles';
+import { ThemeProvider, makeStyles } from '@material-ui/core/styles';
 
 import {
     useWeb3React,
@@ -39,8 +39,17 @@ function getErrorMessage(error) {
     }
 }
 
+const useStyles = makeStyles((theme) => ({
+    bodyContainer: {
+        [theme.breakpoints.up('md')]: {
+            height: "100vh"
+        }
+    },
+}));
+
 
 export default function Layout({ children }) {
+    const classes = useStyles();
     const darkmodeContext = useDarkmode();
     const theme = darkmodeContext.darkmode ? darkTheme : lightTheme;
 
@@ -71,7 +80,7 @@ export default function Layout({ children }) {
 
     return (
         <ThemeProvider theme={theme}>
-            <Box bgcolor="background.default" height="100vh">
+            <Box className={classes.bodyContainer} bgcolor="background.default">
                 <Header setActivatingConnector={setActivatingConnector} getErrorMessage={getErrorMessage} />
                 {children}
                 <Footer />
