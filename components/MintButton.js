@@ -15,7 +15,6 @@ import SimpleModal from './SimpleModal'
 
 import {
     useWeb3React,
-    UnsupportedChainIdError
 } from "@web3-react/core";
 
 const useStyles = makeStyles((theme) => ({
@@ -24,7 +23,8 @@ const useStyles = makeStyles((theme) => ({
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        marginTop: '1.5%',
+        marginTop: '2.5%',
+        width: '50%'
     },
 }));
 
@@ -113,33 +113,47 @@ export default function FormButton({ xDittoContract, dittoContract, inputDitto }
 
     if (approvalLoading) {
         return (
-            <Button type="button" variant="contained" color="primary" size="large"> <CircularProgress color="white" />Approval loading</Button >
+            <Box className={classes.buttonContainer} >
+                <Button type="button" variant="contained" color="primary" size="large">
+                    <Box paddingRight={2} paddingTop={1}>
+                        <CircularProgress color="#ffffff" size={20} />
+                    </Box>
+                    Approval loading
+                </Button>
+            </Box>
         )
     }
 
     if (parseInt(dittoAllowanceAmount) === 0) {
         return (
+            <Box className={classes.buttonContainer} >
             <Button type="button" variant="contained" color="primary" size="large" onClick={() => {
                 approveMint();
-            }}> Approve Mint</Button >
+                }}> Approve Mint</Button>
+            </Box>
         )
     }
 
     if (mintLoading) {
         return (
-            <Button type="button" variant="contained" color="primary" size="large" > <CircularProgress color="#ffffff" /> Minting</Button >
+            <Box className={classes.buttonContainer} >
+                <Button type="button" variant="contained" color="primary" size="large" >
+                    <Box paddingRight={2} paddingTop={1}>
+                        <CircularProgress color="#ffffff" size={20} />
+                    </Box>
+                    Minting
+                </Button >
+            </Box>
         )
     }
 
     return (
         <Box className={classes.buttonContainer} >
-            <div>
-                <Button type="button" variant="contained" color="primary" size="large" onClick={() => {
+            <Button type="button" variant="contained" color="primary" size="large" onClick={() => {
                     mint();
-                }}> Mint</Button>
-            </div>
+            }}> Mint</Button>
             {errorMessage && <Typography>{errorMessage}</Typography>}
-            <SimpleModal open={modalOpen} setModalOpen={setModalOpen} heading={'test'} bodyText={'test'} />
+            <SimpleModal open={modalOpen} setModalOpen={setModalOpen} heading={'Successfully minted XDITTO'} bodyText={'Refresh page & check wallet balance :)'} />
         </Box>
     );
 };

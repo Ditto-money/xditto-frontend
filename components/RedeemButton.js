@@ -8,9 +8,6 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 
 import Box from '@material-ui/core/Box';
-import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import TextField from '@material-ui/core/TextField';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 import SimpleModal from '../components/SimpleModal'
@@ -18,7 +15,6 @@ import SimpleModal from '../components/SimpleModal'
 
 import {
     useWeb3React,
-    UnsupportedChainIdError
 } from "@web3-react/core";
 
 const useStyles = makeStyles((theme) => ({
@@ -27,7 +23,8 @@ const useStyles = makeStyles((theme) => ({
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        marginTop: '1.5%',
+        marginTop: '2.5%',
+        width: '50%'
     },
 }));
 
@@ -123,7 +120,7 @@ export default function RedeemButton({ xDittoContract, dittoContract, inputXDitt
                         <CircularProgress color="white" size={20} />
                     </Box>
                     Approval loading
-                </Button >
+                </Button>
             </Box>
         )
     }
@@ -140,7 +137,14 @@ export default function RedeemButton({ xDittoContract, dittoContract, inputXDitt
 
     if (redeemLoading) {
         return (
-            <Button type="button" variant="contained" color="primary" size="large" > <CircularProgress color="#ffffff" /> Redeeming</Button >
+            <Box className={classes.buttonContainer} >
+                <Button type="button" variant="contained" color="primary" size="large">
+                    <Box paddingRight={2} paddingTop={1}>
+                        <CircularProgress color="white" size={20} />
+                    </Box>
+                    Redeeming
+                </Button>
+            </Box>
         )
     }
 
@@ -152,7 +156,7 @@ export default function RedeemButton({ xDittoContract, dittoContract, inputXDitt
                 }}> Redeem</Button>
             </div>
             {errorMessage && <Typography>{errorMessage}</Typography>}
-            <SimpleModal open={modalOpen} setModalOpen={setModalOpen} heading={'test'} bodyText={'test'} />
+            <SimpleModal open={modalOpen} setModalOpen={setModalOpen} heading={'Successfully redeemed DITTO'} bodyText={'Refresh page & check wallet balance :)'} />
         </Box>
     );
 };
