@@ -179,7 +179,7 @@ export default function Index() {
         </StyledTabs>
         <Typography className={classes.padding} />
       </Box>
-      <Box marginY={2} className={classes.mobileTabs}>
+      <Box marginY={1} className={classes.mobileTabs}>
         <Tabs
           orientation="vertical"
           value={value}
