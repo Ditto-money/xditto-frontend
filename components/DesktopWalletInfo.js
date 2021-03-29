@@ -10,16 +10,15 @@ import {
 
 
 const useStyles = makeStyles((theme) => ({
-    buttonContainer: {
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        marginTop: '1.5%',
+    desktopContainer: {
+        display: 'none',
+        [theme.breakpoints.up('md')]: {
+            display: 'flex',
+        }
     },
 }));
 
-export default function WalletInfo({ dittoBalance, xDittoBalance, exchangeRate, usdPrice }) {
+export default function DesktopWalletInfo({ dittoBalance, xDittoBalance, exchangeRate, usdPrice }) {
 
     const classes = useStyles();
     const context = useWeb3React();
@@ -33,8 +32,11 @@ export default function WalletInfo({ dittoBalance, xDittoBalance, exchangeRate, 
         error
     } = context;
 
+    const dittoInUSD = parseFloat(usdPrice) * parseFloat(dittoBalance);
+    const xDittoInUSD = (parseFloat(usdPrice) * parseFloat(exchangeRate)) * parseFloat(xDittoBalance);
+
     return (
-        <Box position="absolute" top="25%" right="7.5%" display="flex" flexDirection="column" alignItems="center">
+        <Box className={classes.desktopContainer} position="absolute" top="25%" right="7.5%" display="flex" flexDirection="column" alignItems="center">
             <Typography color="primary" variant="h6">DITTO in wallet</Typography>
             {
                 account === undefined
@@ -46,8 +48,8 @@ export default function WalletInfo({ dittoBalance, xDittoBalance, exchangeRate, 
                         <Typography color="textPrimary" variant="body2" style={{ paddingTop: '10px' }}>{None}</Typography>
                         :
                         <Box textAlign='center'>
-                            <Typography color="textPrimary" variant="body2" style={{ paddingTop: '10px' }}>{`${dittoBalance} DITTO`}</Typography>
-                            <Typography color="textPrimary" variant="body2" style={{ paddingTop: '5px' }}>{`${usdPrice * dittoBalance} USD`}</Typography>
+                            <Typography color="textPrimary" variant="body2" style={{ paddingTop: '10px' }}>{`${parseFloat(dittoBalance).toFixed(4)} DITTO`}</Typography>
+                            <Typography color="textPrimary" variant="body2" style={{ paddingTop: '5px' }}>{`${dittoInUSD.toFixed(2)} USD`}</Typography>
                         </Box>
 
             }
@@ -62,8 +64,8 @@ export default function WalletInfo({ dittoBalance, xDittoBalance, exchangeRate, 
                         <Typography color="textPrimary" variant="body2" style={{ paddingTop: '10px' }}>{None}</Typography>
                         :
                         <Box textAlign='center'>
-                            <Typography color="textPrimary" variant="body2" style={{ paddingTop: '10px' }}>{`${xDittoBalance} xDITTO`}</Typography>
-                            <Typography color="textPrimary" variant="body2" style={{ paddingTop: '5px' }}>{`${(usdPrice * exchangeRate) * xDittoBalance} USD`}</Typography>
+                            <Typography color="textPrimary" variant="body2" style={{ paddingTop: '10px' }}>{`${parseFloat(xDittoBalance).toFixed(4)} xDITTO`}</Typography>
+                            <Typography color="textPrimary" variant="body2" style={{ paddingTop: '5px' }}>{`${xDittoInUSD.toFixed(2)} USD`}</Typography>
                         </Box>
 
 
@@ -78,7 +80,7 @@ export default function WalletInfo({ dittoBalance, xDittoBalance, exchangeRate, 
                         ?
                         <Typography color="textPrimary" variant="body2" style={{ paddingTop: '10px' }}>{Unavailable}</Typography>
                         :
-                        <Typography color="textPrimary" variant="body2" style={{ paddingTop: '10px' }}>{`1 xDITTO = ${exchangeRate} DITTO`}</Typography>
+                        <Typography color="textPrimary" variant="body2" style={{ paddingTop: '10px' }}>{`1 xDITTO = ${parseFloat(exchangeRate).toFixed(4)} DITTO`}</Typography>
             }
         </Box>
     );

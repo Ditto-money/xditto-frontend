@@ -23,17 +23,22 @@ import {
 
 
 const useStyles = makeStyles((theme) => ({
-    buttonContainer: {
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        marginTop: '1.5%',
+    desktopContainer: {
+        display: 'none',
+        [theme.breakpoints.up('md')]: {
+            display: 'block',
+        }
     },
+    mobileContainer: {
+        display: 'block',
+        flexDirection: 'column',
+        [theme.breakpoints.up('md')]: {
+            display: 'none',
+        },
+    }
 }));
 
-export default function Footer({ setActivatingConnector, getErrorMessage }) {
-    const darkmodeContext = useDarkmode();
+export default function Footer() {
 
     const classes = useStyles();
     const context = useWeb3React();
@@ -49,30 +54,49 @@ export default function Footer({ setActivatingConnector, getErrorMessage }) {
     } = context;
 
     return (
-        <Box position='sticky' top="85%">
-            <Box display="flex" justifyContent="space-between">
-                <Box display="flex" alignItems="center" paddingLeft={'5%'}>
-                    <Image
-                        src="/images/ditto.png"
-                        alt="Main Ditto logo mascot"
-                        width={'100%'}
-                        height={'100%'}
-                    />
-                </Box>
-                <Box display="flex" alignItems="center" paddingLeft={5} width="15%" justifyContent="space-between">
-                    <a href="https://t.me/dittomoney" target="_blank"><FontAwesomeIcon icon={faTelegram} size="2x" style={{ color: '#ED7AC0' }} /></a>
-                    <a href="https://dittomoney.medium.com" target="_blank"><FontAwesomeIcon icon={faMedium} size="2x" style={{ color: '#ED7AC0' }} /></a>
-                    <a href="https://twitter.com/dittomoney_" target="_blank"><FontAwesomeIcon icon={faTwitter} size="2x" style={{ color: '#ED7AC0' }} /></a>
-                    <a href="https://github.com/Ditto-money/" target="_blank"><FontAwesomeIcon icon={faGithub} size="2x" style={{ color: '#ED7AC0' }} /></a>
-                </Box>
-                <Box display="flex" alignItems="center" paddingRight={'5%'}>
-                    <Typography color="textPrimary">First elastic supply token on BSC <br /> Copywhat? 2021 Ditto.money</Typography>
+        <>
+            <Box className={classes.desktopContainer} position='sticky' top="85%">
+                <Box display="flex" justifyContent="space-between">
+                    <Box display="flex" alignItems="center" paddingLeft={'5%'}>
+                        <Image
+                            src="/images/ditto.png"
+                            alt="Main Ditto logo mascot"
+                            width={'100%'}
+                            height={'100%'}
+                        />
+                    </Box>
+                    <Box display="flex" alignItems="center" paddingLeft={5} width="45%" justifyContent="space-evenly">
+                        <a href="https://t.me/dittomoney" target="_blank"><FontAwesomeIcon icon={faTelegram} size="2x" style={{ color: '#ED7AC0' }} /></a>
+                        <a href="https://dittomoney.medium.com" target="_blank"><FontAwesomeIcon icon={faMedium} size="2x" style={{ color: '#ED7AC0' }} /></a>
+                        <a href="https://twitter.com/dittomoney_" target="_blank"><FontAwesomeIcon icon={faTwitter} size="2x" style={{ color: '#ED7AC0' }} /></a>
+                        <a href="https://github.com/Ditto-money/" target="_blank"><FontAwesomeIcon icon={faGithub} size="2x" style={{ color: '#ED7AC0' }} /></a>
+                    </Box>
+                    <Box display="flex" alignItems="center" paddingRight={'5%'}>
+                        <Typography color="textPrimary">First elastic supply token on BSC <br /> Copywhat? 2021 Ditto.money</Typography>
+                    </Box>
                 </Box>
             </Box>
-        </Box>
-
-
-
-
+            <Box className={classes.mobileContainer} marginTop="20%">
+                <Box display="flex" flexDirection="column" alignItems="center">
+                    <Box display="flex" alignItems="center">
+                        <Image
+                            src="/images/ditto.png"
+                            alt="Main Ditto logo mascot"
+                            width={'100%'}
+                            height={'100%'}
+                        />
+                    </Box>
+                    <Box display="flex" alignItems="center" width="100%" justifyContent="space-evenly" marginY="5%">
+                        <a href="https://t.me/dittomoney" target="_blank"><FontAwesomeIcon icon={faTelegram} size="2x" style={{ color: '#ED7AC0' }} /></a>
+                        <a href="https://dittomoney.medium.com" target="_blank"><FontAwesomeIcon icon={faMedium} size="2x" style={{ color: '#ED7AC0' }} /></a>
+                        <a href="https://twitter.com/dittomoney_" target="_blank"><FontAwesomeIcon icon={faTwitter} size="2x" style={{ color: '#ED7AC0' }} /></a>
+                        <a href="https://github.com/Ditto-money/" target="_blank"><FontAwesomeIcon icon={faGithub} size="2x" style={{ color: '#ED7AC0' }} /></a>
+                    </Box>
+                    <Box display="flex" alignItems="center" textAlign="center">
+                        <Typography color="textPrimary">First elastic supply token on BSC <br /> Copywhat? 2021 Ditto.money</Typography>
+                    </Box>
+                </Box>
+            </Box>
+        </>
     );
 };

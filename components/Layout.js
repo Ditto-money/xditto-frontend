@@ -1,5 +1,4 @@
 import React from 'react';
-import { ethers } from 'ethers'
 
 import Box from '@material-ui/core/Box';
 import { ThemeProvider } from '@material-ui/core/styles';
@@ -13,18 +12,13 @@ import {
     UserRejectedRequestError as UserRejectedRequestErrorInjected
 } from "@web3-react/injected-connector";
 
-import XDITTO_ABI from '../lib/contract/abi.json';
-import DITTO_ABI from '../lib/contract/DITTOAbi.json';
-import ORACLE_ABI from '../lib/contract/oracleAbi.json';
-
 import { useDarkmode } from '../lib/ui-context';
 import { useEagerConnect, useInactiveListener } from "../lib/injected-connector-hooks";
 
 import { lightTheme, darkTheme } from '../theme';
 
-import Header from './Header'
-import Footer from './Footer'
-import WalletInfo from './WalletInfo'
+import Header from './Header';
+import Footer from './Footer';
 
 
 
@@ -75,49 +69,10 @@ export default function Layout({ children }) {
     // handle logic to connect in reaction to certain events on the injected ethereum provider, if it exists
     useInactiveListener(!triedEager || !!activatingConnector);
 
-    const [exchangeRate, setExchangeRate] = React.useState();
-    const [xDittoBalance, setXDittoBalance] = React.useState();
-    const [dittoBalance, setDittoBalance] = React.useState();
-    const [usdPrice, setUsdPrice] = React.useState();
-
-    React.useEffect(() => {
-        const getXDittoValues = async () => {
-            const xDittoContract = new ethers.Contract('0xB0a1DE764A033A76f28E821fBe402EDBFEe937dB', XDITTO_ABI, library.getSigner());
-            const exchangeRate = await xDittoContract.getRedeemAmount(ethers.BigNumber.from("1000000000000000000"));
-            const xDittoBalance = await xDittoContract.balanceOf(account);
-            const formattedXDittoBalance = ethers.utils.formatUnits(xDittoBalance, 18)
-            const formattedExchangeRate = ethers.utils.formatUnits(exchangeRate, 9);
-            setXDittoBalance(formattedXDittoBalance);
-            setExchangeRate(formattedExchangeRate);
-        }
-
-        const getDittoBalance = async () => {
-            const dittoContract = new ethers.Contract('0x233d91a0713155003fc4dce0afa871b508b3b715', DITTO_ABI, library.getSigner());
-            const dittoBalance = await dittoContract.balanceOf(account);
-            const formattedDittoBalance = ethers.utils.formatUnits(dittoBalance, 9);
-            setDittoBalance(formattedDittoBalance);
-        }
-
-        const getUsdPrice = async () => {
-            const oracleContract = new ethers.Contract('0x2df19009b4a48636699d4dbf00e1d7f923c6fa47', ORACLE_ABI, library.getSigner());
-            const oracleData = await oracleContract.getData();
-            const oraclePrice = ethers.utils.formatUnits(oracleData, 18);
-            setUsdPrice(oraclePrice);
-        }
-
-        if (library) {
-            getXDittoValues();
-            getDittoBalance();
-            getUsdPrice();
-        }
-    }, [library, chainId]);
-
-
     return (
         <ThemeProvider theme={theme}>
             <Box bgcolor="background.default" height="100vh">
                 <Header setActivatingConnector={setActivatingConnector} getErrorMessage={getErrorMessage} />
-                <WalletInfo dittoBalance={dittoBalance} xDittoBalance={xDittoBalance} exchangeRate={exchangeRate} usdPrice={usdPrice} />
                 {children}
                 <Footer />
             </Box>

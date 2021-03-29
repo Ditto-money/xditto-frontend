@@ -25,13 +25,18 @@ import {
 
 
 const useStyles = makeStyles((theme) => ({
-    buttonContainer: {
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        marginTop: '1.5%',
+    desktopContainer: {
+        display: 'none',
+        [theme.breakpoints.up('md')]: {
+            display: 'flex',
+        }
     },
+    mobileContainer: {
+        display: 'flex',
+        [theme.breakpoints.up('md')]: {
+            display: 'none',
+        },
+    }
 }));
 
 export default function Header({ setActivatingConnector, getErrorMessage }) {
@@ -52,7 +57,7 @@ export default function Header({ setActivatingConnector, getErrorMessage }) {
 
     return (
         <div>
-            <Box display="flex" justifyContent="center" alignItems="center">
+            <Box className={classes.desktopContainer} justifyContent="center" alignItems="center">
                 <Image
                     src="/images/ditto.png"
                     alt="Main Ditto logo mascot"
@@ -63,8 +68,76 @@ export default function Header({ setActivatingConnector, getErrorMessage }) {
                     <Typography variant="h3" color="primary">Ditto</Typography>
                 </Box>
             </Box>
+            <Box className={classes.mobileContainer} paddingTop={'2%'} justifyContent="center" alignItems="center">
+                <Image
+                    src="/images/ditto.png"
+                    alt="Main Ditto logo mascot"
+                    width={'75%'}
+                    height={'75%'}
+                />
+                <Box paddingLeft="5px">
+                    <Typography variant="h3" color="primary">Ditto</Typography>
+                </Box>
+            </Box>
+            <Box className={classes.mobileContainer} position="absolute" top="3.5%" right="5%" >
+                <IconButton color="primary" aria-label="dark mode toggle" type="button" onClick={() => { darkmodeContext.setDarkmode(!darkmodeContext.darkmode); }}>
+                    {darkmodeContext.darkmode ? <Brightness7Icon /> : <Brightness3Icon />}
+                </IconButton>
+            </Box>
 
-            <Box position="absolute" top="5%" right="5%" display="flex" flexDirection="column" width={'25%'}>
+            <Box className={classes.mobileContainer} alignItems='center' justifyContent='center' paddingTop="10px">
+                <Box display="flex" flexDirection="row" alignItems='center' justifyContent="center" width={'100%'}>
+                    <Typography variant="caption" color="textPrimary">
+                        {
+                            account === undefined
+                                ?
+                                "..."
+                                :
+                                account === null
+                                    ?
+                                    "None"
+                                    :
+                                    `${account.substring(0, 6)}...${account.substring(
+                                        account.length - 4
+                                    )}`
+                        }
+                    </Typography>
+
+                    {(active || error) ? (
+                        <Button
+                            color="primary"
+                            disableElevation
+                            onClick={() => {
+                                deactivate();
+                            }}
+                        >
+                            Disconnect wallet
+                        </Button>
+
+                    ) :
+                        <Button
+                            color="primary"
+                            disableElevation
+                            onClick={() => {
+                                setActivatingConnector(injected);
+                                activate(injected);
+                            }}
+                        >
+                            Connect wallet
+                        </Button>
+                    }
+                </Box>
+
+            </Box>
+            <Box className={classes.mobileContainer} justifyContent='center'>
+                {!!error && (
+                    <Typography color="textPrimary" style={{ marginTop: "0.5rem", marginBottom: "0", textAlign: 'center', fontSize: "16px" }}>
+                        {getErrorMessage(error)}
+                    </Typography>
+                )}
+            </Box>
+
+            <Box className={classes.desktopContainer} position="absolute" top="5%" right="5%" display="flex" flexDirection="column" width={'25%'}>
                 <Box display="flex" flexDirection="row" alignItems='center' justifyContent="space-evenly">
                     <Typography variant="caption" color="textPrimary">
                         {

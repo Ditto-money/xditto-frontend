@@ -29,7 +29,10 @@ const useStyles = makeStyles((theme) => ({
         marginTop: '5%',
     },
     inputField: {
-        width: '35%',
+        width: '95%',
+        [theme.breakpoints.up('md')]: {
+            width: '40%'
+        },
     }
 }));
 
