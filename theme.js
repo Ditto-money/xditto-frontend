@@ -31,6 +31,10 @@ let lightTheme = createMuiTheme({
         background: {
             default: '#FFF9FF',
         },
+        text: {
+            primary: '#000000',
+            secondary: '#000000'
+        }
     },
 });
 
@@ -65,7 +69,8 @@ let darkTheme = createMuiTheme({
             default: '#4F1538',
         },
         text: {
-            primary: '#FFFFFF'
+            primary: '#FFFFFF',
+            secondary: '#FFFFFF'
         }
     },
 });
