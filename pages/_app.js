@@ -1,10 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Head from 'next/head';
-import { ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Layout from '../components/Layout'
-import { lightTheme, darkTheme } from '../theme';
 import { DarkmodeProvider } from '../lib/ui-context';
 
 
@@ -35,7 +33,7 @@ export default function MyApp(props) {
   return (
     <React.Fragment>
       <Head>
-        <title>My page</title>
+        <title>Mint/Redeem xDITTO</title>
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
       </Head>
       <Web3ReactProvider getLibrary={getLibrary}>

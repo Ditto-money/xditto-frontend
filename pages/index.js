@@ -9,7 +9,6 @@ import Tab from '@material-ui/core/Tab';
 
 import {
   useWeb3React,
-  UnsupportedChainIdError
 } from "@web3-react/core";
 
 import XDITTO_ABI from '../lib/contract/abi.json';
