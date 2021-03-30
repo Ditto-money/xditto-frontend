@@ -32,7 +32,7 @@ function getErrorMessage(error) {
         error instanceof UserRejectedRequestErrorWalletConnect ||
         error instanceof UserRejectedRequestErrorFrame
     ) {
-        return "Please authorize this website to access your Ethereum account.";
+        return "Please authorize this website to access your Binance Smart Chain account.";
     } else {
         console.error(error);
         return "An unknown error occurred. Check the console for more details.";
